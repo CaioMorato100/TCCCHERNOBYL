@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -13,10 +14,15 @@ public class PlayerScript : MonoBehaviour
     private Animator anim;
     private bool verificarDirecao;
 
+    public GameObject info;
+    public Text interacao;
+    public GameObject image;
+
     void Start()
     {
         rB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        info.SetActive(false);
     }
 
 
@@ -50,7 +56,27 @@ public class PlayerScript : MonoBehaviour
         float x = transform.localScale.x * -1;
         transform.localScale = new Vector3(x, transform.localScale.y, transform.localScale.z);
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "info")
+        {
+            image.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+
+                
+                info.SetActive(true);
+
+
+                
+            }
+        }
+
+       
+
+    }
+
 }
 
 
